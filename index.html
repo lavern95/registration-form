@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    form {
+      margin: 0 auto;
+      width: 500px;
+    }
+
+    label {
+      display: inline-block;
+      width: 100px;
+    }
+
+    input {
+      width: 200px;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Registration Form</h1>
+
+  <form action="register.php" method="post" onsubmit="return validateForm()">
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <span class="error" id="firstNameError"></span>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <span class="error" id="lastNameError"></span>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span class="error" id="emailError"></span>
+
+    <label for="userId">User ID:</label>
+    <input type="text" id="userId" name="userId" required>
+    <span class="error" id="userIdError"></span>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <span class="error" id="passwordError"></span>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <span class="error" id="confirmPasswordError"></span>
+
+    <button type="submit">Register</button>
+
+  </form>
+
+  <script>
+    function validateForm() {
+      // Get the values from the form.
+      var firstName = document.getElementById('firstName').value;
+      var lastName = document.getElementById('lastName').value;
+      var email = document.getElementById('email').value;
+      var userId = document.getElementById('userId').value;
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Clear any existing error messages.
+      document.getElementById('firstNameError').innerHTML = '';
+      document.getElementById('lastNameError').innerHTML = '';
+      document.getElementById('emailError').innerHTML = '';
+      document.getElementById('userIdError').innerHTML = '';
+      document.getElementById('passwordError').innerHTML = '';
+      document.getElementById('confirmPasswordError').innerHTML = '';
+
+      // Validate the first name.
+      if (firstName === '') {
+        document.getElementById('firstNameError').innerHTML = 'First name is required.';
+        return false;
+      }
+
+      // Validate the last name.
+      if (lastName === '') {
+        document.getElementById('lastNameError').innerHTML = 'Last name is required.';
+        return false;
+      }
+
+      // Validate the email address.
+      if (email === '') {
+        document.getElementById('emailError').innerHTML = 'Email address is required.';
+        return false;
+      } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+        document.getElementById('emailError').innerHTML = 'Invalid email address.';
+        return false;
+      }
+
+      // Validate the user ID.
+      if (userId === '') {
+        document.getElementById('userIdError').innerHTML = 'User ID is required.';
+        return false;
+      }
+
+      // Validate the password.
+      if (password === '') {
+        document.getElementById('passwordError').innerHTML = 'Password is required.';
+        return false;
+      }
+
+      // Validate the confirmation of password.
+      if (confirmPassword === '') {
+        document.getElementById('confirmPasswordError').innerHTML = 'Please confirm the password.';
+        return false;
+      }
+
+      // Check if passwords match.
+      if (password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').innerHTML = 'Passwords do not match.';
+        return false;
+      }
+
+      return true; // Form is valid
+    }
+  </script>
+
+</body>
+</html>
+
